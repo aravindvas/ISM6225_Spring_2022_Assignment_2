@@ -13,7 +13,7 @@ namespace ISM6225_Assignment_2_Spring_2022
     {
         static void Main(string[] args)
         {
-            /*
+            
             //Question 1:
             Console.WriteLine("Question 1:");
             int[] nums1 = { 1, 3, 5, 6 };
@@ -30,14 +30,14 @@ namespace ISM6225_Assignment_2_Spring_2022
             string commonWord = MostCommonWord(paragraph, banned);
             Console.WriteLine("Most frequent word is \'{0}\'", commonWord);
             Console.WriteLine();
-            
+
             //Question 3:
             Console.WriteLine("Question 3");
             int[] arr1 = { 2, 2, 2, 3, 3 };
             int lucky_number = FindLucky(arr1);
             Console.WriteLine("The Lucky number in the given array is {0}", lucky_number);
             Console.WriteLine();
-            
+
             //Question 4:
             Console.WriteLine("Question 4");
             string secret = "112233";
@@ -45,7 +45,18 @@ namespace ISM6225_Assignment_2_Spring_2022
             string hint = GetHint(secret, guess);
             Console.WriteLine("Hint for the guess is : {0}", hint);
             Console.WriteLine();
-            
+
+            //Question 5:
+            Console.WriteLine("Question 5");
+            string s = "eccbbbbdec";
+            List<int> part = PartitionLabels(s);
+            Console.WriteLine("Partation lengths are:");
+            for (int i = 0; i < part.Count; i++)
+            {
+                Console.Write(part[i] + "\t");
+            }
+            Console.WriteLine();
+
             //Question 6:
             Console.WriteLine("Question 6");
             int[] widths = new int[] { 4, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
@@ -78,17 +89,7 @@ namespace ISM6225_Assignment_2_Spring_2022
             Console.WriteLine("Number of with unique code are: {0}", diffwords);
             Console.WriteLine();
             Console.WriteLine();
-            */
-            //Question 5:
-            Console.WriteLine("Question 5");
-            string s = "eccbbbbdec";
-            List<int> part = PartitionLabels(s);
-            Console.WriteLine("Partation lengths are:");
-            for (int i = 0; i < part.Count; i++)
-            {
-                Console.Write(part[i] + "\t");
-            }
-            Console.WriteLine();
+           
         }
         /*
          Question 5:
@@ -108,7 +109,7 @@ namespace ISM6225_Assignment_2_Spring_2022
             try
             {
                 int x = -1;
-                int maxV = 0;
+                int maxValue = 0;
                 int[] lastIndex = new int[s.Length];
                 List<int> divStringsIndex = new List<int>();
                 List<string> divStrings = new List<string>();
@@ -116,21 +117,22 @@ namespace ISM6225_Assignment_2_Spring_2022
                 {
                     lastIndex[j] = s.LastIndexOf(s[j]);
                 }
+                //storing all the last occurances in the given string
                 for (int i = 0; i<s.Length; i++)
                 {
-                    if (maxV != i)
+                    if (maxValue != i)
                     {
-                        //x = s.LastIndexOf(s[i]);
-                        maxV = Math.Max(maxV, lastIndex[i]);
-                        
+                        maxValue = Math.Max(maxValue, lastIndex[i]);
+                        //getting the max value before it matches i
                     }
-                    if (maxV == i)
+                    if (maxValue == i)
                     {
-                        maxV = s.LastIndexOf(s[i]);
+                        maxValue = s.LastIndexOf(s[i]);
                         if (i != 0)
                         {
-                            divStrings.Add(s.Substring(x + 1, maxV - x));
+                            divStrings.Add(s.Substring(x + 1, maxValue - x));
                             x = i;
+                            //getting rid of the 1st execution
                         }
                     }
                 }
@@ -138,6 +140,7 @@ namespace ISM6225_Assignment_2_Spring_2022
                 for(int k = 0; k<divStrings.Count; k++)
                 {
                     divStringsIndex.Add(divStrings[k].Length);
+                    //storing all the lengths of seperated strings in a list 
                 }
                 return divStringsIndex;
             }
@@ -149,27 +152,27 @@ namespace ISM6225_Assignment_2_Spring_2022
 
 
         /*
-    Question 8
-   International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows:
-   •	'a' maps to ".-",
-   •	'b' maps to "-...",
-   •	'c' maps to "-.-.", and so on.
-   For convenience, the full table for the 26 letters of the English alphabet is given below:
-   [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
-   Given an array of strings words where each word can be written as a concatenation of the Morse code of each letter.
-       •	For example, "cab" can be written as "-.-..--...", which is the concatenation of "-.-.", ".-", and "-...". We will call such a concatenation the transformation of a word.
-   Return the number of different transformations among all words we have.
+        Question 8
+        International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows:
+        •	'a' maps to ".-",
+        •	'b' maps to "-...",
+        •	'c' maps to "-.-.", and so on.
+        For convenience, the full table for the 26 letters of the English alphabet is given below:
+        [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+        Given an array of strings words where each word can be written as a concatenation of the Morse code of each letter.
+        •	For example, "cab" can be written as "-.-..--...", which is the concatenation of "-.-.", ".-", and "-...". We will call such a concatenation the transformation of a word.
+        Return the number of different transformations among all words we have.
 
-   Example 1:
-   Input: words = ["gin","zen","gig","msg"]
-   Output: 2
-   Explanation: The transformation of each word is:
-   "gin" -> "--...-."
-   "zen" -> "--...-."
-   "gig" -> "--...--."
-   "msg" -> "--...--."
-   There are 2 different transformations: "--...-." and "--...--.".
-   */
+        Example 1:
+        Input: words = ["gin","zen","gig","msg"]
+        Output: 2
+        Explanation: The transformation of each word is:
+        "gin" -> "--...-."
+        "zen" -> "--...-."
+        "gig" -> "--...--."
+        "msg" -> "--...--."
+        There are 2 different transformations: "--...-." and "--...--.".
+        */
 
         public static int UniqueMorseRepresentations(string[] words)
             {
@@ -178,19 +181,21 @@ namespace ISM6225_Assignment_2_Spring_2022
                     string alpha = "abcdefghijklmnopqrstuvwxyz";
                     string[] concatedMorse = new string[words.Length];
                     List<string> disctictMorse = new List<string>();
-                    int tot = 0;
+                    int total = 0;
                     string[] morseGiven = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." };
+                    //storing the given morse values to an array
                     Dictionary<char, string> alphaMorse = new Dictionary<char, string>();
                     for(int i = 0; i<26; i++)
                     {
                         alphaMorse[alpha[i]] = morseGiven[i];
+                        //assigning the values of charecters in alphabets to respective morse codes 
                     }
                     for(int j = 0; j<words.Length; j++)
                     {
                         for(int k = 0; k<words[j].Length; k++)
                         {
                             concatedMorse[j] = string.Concat(concatedMorse[j], alphaMorse[words[j][k]]);
-                        
+                            //concating morse codes for a charecters in a given string
                         }  
                     }
                     for(int l = 0; l< concatedMorse.Length; l++)
@@ -198,10 +203,12 @@ namespace ISM6225_Assignment_2_Spring_2022
                         if (!disctictMorse.Contains(concatedMorse[l]))
                         {
                             disctictMorse.Add(concatedMorse[l]);
+                            //if a string is not found, then adding it to a new list, to get distinct values
                         }
                     }
-                    tot = disctictMorse.Count;
-                    return tot;
+                    total = disctictMorse.Count;
+                    return total;
+                    //returning distinct values of morse codes found after converting a string to morse code
                 }
                 catch (Exception)
                 {
