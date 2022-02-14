@@ -1,9 +1,4 @@
-﻿/* 
- 
-YOU ARE NOT ALLOWED TO MODIFY ANY FUNCTION DEFINATION's PROVIDED.
-WRITE YOUR CODE IN THE RESPECTIVE QUESTION FUNCTION BLOCK
-*/
-
+﻿
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +8,7 @@ namespace ISM6225_Assignment_2_Spring_2022
     {
         static void Main(string[] args)
         {
-            /*
+            
             //Question 1:
             Console.WriteLine("Question 1:");
             int[] nums1 = { 2, 4, 6, 8, 10 };
@@ -89,7 +84,7 @@ namespace ISM6225_Assignment_2_Spring_2022
             Console.WriteLine("Number of with unique code are: {0}", diffwords);
             Console.WriteLine();
             Console.WriteLine();
-           */
+           
         }
         /*
         
