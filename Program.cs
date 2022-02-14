@@ -84,8 +84,17 @@ namespace ISM6225_Assignment_2_Spring_2022
             Console.WriteLine("Number of with unique code are: {0}", diffwords);
             Console.WriteLine();
             Console.WriteLine();
-           
+            
+            //Question 10:
+            Console.WriteLine("Question 10");
+            string word1 = "horse";
+            string word2 = "ros";
+            int minLen = MinDistance(word1, word2);
+            Console.WriteLine("Minimum number of operations required are {0}", minLen);
+            Console.WriteLine();
         }
+        
+
         /*
         
         Question 1:
@@ -572,6 +581,72 @@ namespace ISM6225_Assignment_2_Spring_2022
                 }
 
             }
+        /*
+         
+        Question 10:
+        Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
+        You have the following three operations permitted on a word:
+        •	Insert a character
+        •	Delete a character
+        •	Replace a character
+         Note: Try to come up with a solution that has polynomial runtime, then try to optimize it to quadratic runtime.
+        Example 1:
+        Input: word1 = "horse", word2 = "ros"
+        Output: 3
+        Explanation: 
+        horse -> rorse (replace 'h' with 'r')
+        rorse -> rose (remove 'r')
+        rose -> ros (remove 'e')
+        */
+
+        public static int MinDistance(string word1, string word2)
+        {
+            try
+            {
+                int w1Length = word1.Length;
+                int w2Length = word2.Length;
+
+                if (w1Length == 0 || w2Length == 0)
+                {
+                    return w1Length + w2Length;
+                    //if both the words have 0 length returning addition of their lengths
+                }
+
+                int[,] operationsP = new int[w1Length + 1, w2Length + 1];
+
+                for (int i = 0; i <= w1Length; i++)
+                {
+                    for (int j = 0; j <= w2Length; j++)
+                    {
+                        if (i == 0)
+                        {
+                            operationsP[i, j] = j;
+                        }
+                        else if (j == 0)
+                        {
+                            operationsP[i, j] = i;
+                        }
+                        else if (word1[i - 1] == word2[j - 1])
+                        {
+                            operationsP[i, j] = operationsP[i - 1, j - 1];
+                        }
+                        else
+                        {
+                            int x = Math.Min(operationsP[i, j - 1], operationsP[i - 1, j]);
+                            operationsP[i, j] = Math.Min(operationsP[i - 1, j - 1], x) + 1;
+                        }
+                    }
+                }
+
+                return operationsP[w1Length, w2Length];
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
 //Self-Reflection
@@ -584,19 +659,21 @@ time taken     - 35min
 learnings      - using boolean, dictionary, splitting using array of charecters
 Question3: 
 time taken     - 45min
-learnings      - using dictionary, keys and values 
+learnings      - using dictionary, keys and values, using o(n)
 Question4: 
 time taken     - 40min
 Question5: 
 time taken     - 55min
-learnings      - using lists and its attribute methods
+learnings      - using lists and its attribute methods, using o(n)
 Question6: 
 time taken     - 45min
 learnings      - using flag and lists
 Question7: 
 time taken     - 15min
-learnings      - using o(n)
 Question8: 
 time taken     - 25min
+learnings      - using lists and its attribute
+Question10: 
+time taken     - 125min
 learnings      - using o(n)
 */
